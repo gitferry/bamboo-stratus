@@ -29,7 +29,6 @@ Features:
 3. Build `server` and `client`.
 
 ```bash
-#!/bin/bash
 cd bamboo/bin
 go build ../server
 go build ../client
@@ -53,19 +52,16 @@ In simulation mode, replicas are running in separate Goroutines and messages are
 5. Run `server` and then run `client` using scripts. Note that the number followed by the `runClient.sh` is the number of clients that you wish to run.
 
 ```bash
-#!/bin/bash
 ./simulation.sh
 ```
 
 ```bash
-#!/bin/bash
 ./runClient.sh 10
 ```
 
 6. Close the simulation by stopping the client and the server in order.
 
 ```bash
-#!/bin/bash
 ./closeClient.sh
 ./stop.sh
 ```
@@ -79,30 +75,39 @@ Nodes can be deployed in a real network.
 1. ```bash
     cd bamboo/bin/deploy/linux
     ```
+
 2. Authorize remote servers (send local public key to the remote) by adding the IP list into `auth/server_auth.txt` and modifying the user name and password in `auth/server_auth.json`. Then, run the script.
 
 ```bash
 ./auth/server_auth.sh
 ```
+
 3. Build `server` and `client`.
 4. Specify external IPs and internal IPs of server nodes in `pub_ips.txt` and `ips.txt`, respectively.
-4. IPs of machines running as clients are specified in `clients.txt`.
-5. The type of the protocol is specified in `run.sh`.
-6. Modify configuration parameters in `config.json`.
-7. Upload binaries and config files onto the remote machines.
+5. IPs of machines running as clients are specified in `clients.txt`.
+6. The type of the protocol is specified in `run.sh`.
+7. Modify configuration parameters in `config.json`.
+8. Upload binaries and config files onto the remote machines.
+
 ```bash
 ./deploy.sh
 ./setup_cli.sh
 ```
-8. Start the server nodes.
+
+9. Start the server nodes.
+
 ```bash
 ./start_server.sh
 ```
-9. Start the clients by specifying no. of clients running on each machine.
+
+10. Start the clients by specifying no. of clients running on each machine.
+
 ```bash
 ./start_client.sh 10
 ```
-12. Stop the client and server.
+
+11. Stop the client and server.
+
 ```bash
 ./exp_stop.sh
 ```
@@ -110,7 +115,9 @@ Nodes can be deployed in a real network.
 ## Monitor
 
 During each run, one can view the statistics (throughput, latency, view number, etc.) at a node via a browser.
+
 ```
 http://127.0.0.1:8070/query
-``` 
+```
+
 where `127.0.0.1:8070` can be replaced with the actual node address.

@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
 SMALL_SIZE = 8
-MEDIUM_SIZE = 13
-BIGGER_SIZE = 16
+MEDIUM_SIZE = 15
+BIGGER_SIZE = 20
 
 plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
 plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
@@ -11,6 +11,8 @@ plt.rc('xtick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=MEDIUM_SIZE)    # legend fontsize
 
+plt.rcParams['text.usetex'] = True
+
 # batchsize = 512000
 def do_plot():
     f, ax = plt.subplots(1,2,figsize=(10,4),constrained_layout=True)
@@ -18,6 +20,38 @@ def do_plot():
     xticks = [14.5,16, 32, 64, 128, 256, 400, 410]
     xticks_label = ["","16", "", "64", "128", "256", "400", ""]
     thru = [
+    ('SMP-HS',[
+        207, # batchsize = 128000
+        195,
+        185,
+        131.7,
+        101, # batchsize = 512000
+        88,
+    ], 'p', 'steelblue'),
+    (r'\textbf{S-HS}',[
+        202,
+        186,
+        176.9,
+        125.3,
+        93,
+        82,
+    ], 's', 'purple'),
+    (r'\textbf{S-SL}',[
+        167,
+        149.3,
+        110.9,
+        70.3,
+        30,
+        10,
+    ], '<', 'brown'),
+    ('Narwhal',[
+        254.3, # 173.3, 16
+        167.8, # 32
+        139.2, # 64
+        130.2, # 128
+        4.8, # 256
+        0, # 400
+    ], 'h', 'darkseagreen'),
     ('N-HS',[
         167.2,
         49.3,
@@ -34,61 +68,6 @@ def do_plot():
         0,
         0,
     ], '>', 'olive'),
-    ('SMP-HS',[
-        # 175,
-        # 150,
-        # 142,
-        # 89.2,
-        # 78.9,
-        # 184,
-        # 162,
-        # 160,
-        # 112,
-        # 102,
-        # 193,
-        # 151,
-        207, # batchsize = 128000
-        195,
-        185,
-        131.7,
-        101, # batchsize = 512000
-        88,
-    ], 'p', 'steelblue'),
-    ('S-HS',[
-        # 144,
-        # 135,
-        # 130,
-        # 80.1,
-        # 55.1,
-        # 181,
-        # 155,
-        # 152,
-        # 101,
-        # 92,
-        # 146,
-        202,
-        186,
-        176.9,
-        125.3,
-        93,
-        82,
-    ], 's', 'purple'),
-    ('S-SL',[
-        167,
-        149.3,
-        110.9,
-        70.3,
-        30,
-        10,
-    ], '<', 'brown'),
-    ('Narwhal',[
-        254.3, # 173.3, 16
-        167.8, # 32
-        139.2, # 64
-        130.2, # 128
-        4.8, # 256
-        0, # 400
-    ], 'h', 'darkseagreen')
     ]
     for name, entries, style, color in thru:
         # thru = []
@@ -121,18 +100,6 @@ def do_plot():
         1992913,
     ], '>', 'olive'),
     ('SMP-HS',[
-        # 29,
-        # 57,
-        # 98,
-        # 258,
-        # 531,
-        # 38,
-        # 72,
-        # 140,
-        # 220,
-        # 804,
-        # 450,
-        # 1012,
         49,
         96,
         203, # batchsize = 256000
@@ -140,19 +107,7 @@ def do_plot():
         2682, # batchsize = 512000
         4862,
     ], 'p', 'steelblue'),
-    ('S-HS',[
-        # 33,
-        # 72,
-        # 162,
-        # 320,
-        # 1232,
-        # 97,
-        # 279,
-        # 893,
-        # 2891,
-        # 5613,
-        # 878,
-        # 1093,
+    (r'\textbf{S-HS}',[
         53,
         104,
         277,
@@ -160,7 +115,7 @@ def do_plot():
         4573,
         7649,
     ], 's', 'purple'),
-    ('S-SL',[
+    (r'\textbf{S-SL}',[
         129,
         349.3,
         1032.9,
@@ -178,7 +133,7 @@ def do_plot():
     ], '^', 'darkseagreen')
     ]
     for name, entries, style, color in lat:
-        ax[1].plot(replicaNo, entries, marker=style, color=color, mec=color, mfc='none', label='%s' % name, markersize=8)
+        ax[1].plot(replicaNo, entries, marker=style, color=color, mec=color, mfc='none', label=name, markersize=8)
         ax[1].set_ylabel("Latency (ms)")
         ax[1].set_xticks(replicaNo)
         ax[1].set_xticks(xticks)
@@ -189,7 +144,7 @@ def do_plot():
     ax[1].set_ylim([0,10000])
     # f.text(0.5, 0.03, 'Number of nodes', ha='center', va='center')
     # f.supxlabel("Number of replicas")
-    f.supxlabel('# of replicas')
+    f.supxlabel('\# of replicas')
     # plt.subplots_adjust(hspace=0.1)
     plt.savefig('scalability-lan.pdf', format='pdf')
     plt.show()

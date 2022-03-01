@@ -89,7 +89,7 @@ def do_plot():
             throughput.append(t)
             latency.append(l)
         ax.plot(throughput, latency, style, color=color, label='%s' % name, markersize=8, alpha=0.8)
-    plt.legend(fancybox=True,frameon=True,framealpha=0.3,mode={"expand", None},ncol=3, loc='upper center')
+    plt.legend(fancybox=True,frameon=True,framealpha=0.3,mode={"expand", None},ncol=2, loc='upper right')
     plt.grid(linestyle='--', alpha=0.5)
     plt.ylim([0,2000])
     plt.ylabel('Latency (ms)')

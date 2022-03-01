@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
 SMALL_SIZE = 8
-MEDIUM_SIZE = 13
-BIGGER_SIZE = 16
+MEDIUM_SIZE = 15
+BIGGER_SIZE = 20
 
 plt.rc('font', size=BIGGER_SIZE)          # controls default text sizes
 plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
@@ -11,12 +11,48 @@ plt.rc('xtick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=BIGGER_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=MEDIUM_SIZE)    # legend fontsize
 
+plt.rcParams['text.usetex'] = True
+
 def do_plot():
     f, ax = plt.subplots(1,2,figsize=(10,4),constrained_layout=True)
     replicaNo = [16, 32, 64, 128, 256, 400]
     xticks = [14.5, 16, 32, 64, 128, 256, 400, 410]
     xticks_label = ["","16", "", "64", "128", "256", "400", ""]
     thru = [
+    ('SMP-HS',[
+        # 34.1,
+        66.2,
+        61.1,
+        51.8,
+        22.0,
+        17.1,
+        13.8,
+    ], 'p', 'steelblue'),
+    (r'\textbf{S-HS}',[
+        # 50.1,
+        64.6,
+        59.8,
+        49.9,
+        20.9,
+        15.5,
+        12.4,
+    ], 's', 'purple'),
+    (r'\textbf{S-SL}',[
+        60.1,
+        50.3,
+        32.1,
+        8.1,
+        2.3,
+        0.6,
+    ], '<', 'brown'),
+    ('Narwhal',[
+        33.9, #16
+        29, #32
+        24.1, #64
+        18, #128
+        4.4, # 256
+        0, # 400
+    ], 'h', 'darkseagreen'),
     ('N-HS',[
         # 167.2,
         # 49.3,
@@ -37,41 +73,7 @@ def do_plot():
         0,
         0,
         0,
-    ], '>', 'olive'),
-    ('SMP-HS',[
-        # 34.1,
-        66.2,
-        61.1,
-        51.8,
-        22.0,
-        17.1,
-        13.8,
-    ], 'p', 'steelblue'),
-    ('S-HS',[
-        # 50.1,
-        64.6,
-        59.8,
-        49.9,
-        20.9,
-        15.5,
-        12.4,
-    ], 's', 'purple'),
-    ('S-SL',[
-        60.1,
-        50.3,
-        32.1,
-        8.1,
-        2.3,
-        0.6,
-    ], '<', 'brown'),
-    ('Narwhal',[
-        33.9, #16
-        29, #32
-        24.1, #64
-        18, #128
-        4.4, # 256
-        0, # 400
-    ], 'h', 'darkseagreen')
+    ], '>', 'olive')
     ]
     for name, entries, style, color in thru:
         # thru = []
@@ -149,7 +151,7 @@ def do_plot():
     ax[1].set_ylim([0,100000])
     ax[0].grid(linestyle='--', alpha=0.5)
     ax[1].grid(linestyle='--', alpha=0.5)
-    f.supxlabel('# of replicas')
+    f.supxlabel('\# of replicas')
     # f.text(0.5, 0.03, 'Number of nodes', ha='center', va='center')
 #     plt.subplots_adjust(hspace=0.1)
     plt.savefig('scalability-wan.pdf', format='pdf')

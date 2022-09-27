@@ -1,6 +1,6 @@
 # Stratus: Scaling Blockchain Consensus via Shared Mempool
 
-Stratus is a shared Mempool protocol that effectively addresses the communication bottleneck of leader-based Byzantine fault-tolerant (BFT) consensus protocols.
+Stratus is a shared Mempool protocol that effectively addresses the communication bottleneck of leader-based Byzantine fault-tolerant (BFT) consensus protocols. For technical details, please find the [paper](https://arxiv.org/abs/2203.05158), which has been accepted to [ICDE'23](https://icde2023.ics.uci.edu/).
 
 We implemented Stratus and integrated it with state-of-the-art BFT protocols, [HotStuff](https://dl.acm.org/doi/10.1145/3293611.3331591) and [Streamlet](https://dl.acm.org/doi/10.1145/3419614.3423256), based on [Bamboo](https://github.com/gitferry/bamboo), which is an open source project for prototyping, evaluating, and benchmarking BFT consensus and replication protocols.
 The native implementations of HotStuff and Streamlet can also be found in [Bamboo](https://github.com/gitferry/bamboo).
